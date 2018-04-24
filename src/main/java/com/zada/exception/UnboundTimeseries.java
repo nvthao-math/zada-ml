@@ -9,9 +9,9 @@ package com.zada.exception;
  *
  * @author bigdata
  */
-public class UnSupportTimeException extends RuntimeException {
+public class UnboundTimeseries extends RuntimeException {
 
-    public UnSupportTimeException(String message) {
+    public UnboundTimeseries(String message) {
         super(message);
     }
 
