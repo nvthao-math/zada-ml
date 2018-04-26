@@ -30,6 +30,7 @@ public class Difference extends XY {
         super(data);
     }
 
+    @Override
     public <D1 extends Object, D2 extends Number> Map<D1, D2> diff() {
         Map<D1, D2> result = new TreeMap<>();
         for (int i = 0; i < this.getTuples().size(); i++) {
@@ -56,6 +57,18 @@ public class Difference extends XY {
         Map<D1, D2> result = new HashMap<>();
         diffedMap.keySet().forEach((time) -> {
             result.put(time, inverse(time, diffedMap.get(time)));
+        });
+        return result;
+    }
+
+    public <D1 extends Number, D2 extends Number> Map<D1, D2> anomaliesConfimation(Map<D1, D2> diffConfirm) {
+        Map<D1, D2> result = new HashMap<>();
+        diffConfirm.keySet().forEach((time) -> {
+            int pIndex = this.getIndex(time) - interval;
+            Object diffTime = this.getTuples().get(pIndex)._1();
+            if (diffConfirm.get(diffTime) == null) {
+                result.put(time, diffConfirm.get(time));
+            }
         });
         return result;
     }

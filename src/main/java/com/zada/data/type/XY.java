@@ -13,9 +13,10 @@ import java.util.TreeMap;
  *
  * @author bigdata
  */
-public class XY {
+public abstract class XY {
 
-    private Map<Long, Number> data;
+    private TreeMap<Long, Number> data;
+    private boolean asc = true;
 
     // constructor
     public XY() {
@@ -26,10 +27,15 @@ public class XY {
         this.setData(data);
     }
 
+    public abstract <D1 extends Object, D2 extends Number> Map<D1, D2> diff();
+
     /**
      * @return the data
      */
     public Map<Long, Number> getData() {
+        if (!this.asc) {
+            return data.descendingMap();
+        }
         return data;
     }
 
@@ -56,11 +62,32 @@ public class XY {
     }
 
     protected void isTime(Object key) {
+//        boolean is = false;
         try {
             Long.parseLong(key.toString());
+//            is = true;
         } catch (NumberFormatException ignore) {
             throw new UnSupportTimeException("TimeSeries data can not support Key without parsing to Long");
         }
+//        if (!is) {
+//            throw new UnSupportTimeException("TimeSeries can not support Key without parsing to Long");
+//        }
+    }
+
+    /**
+     * @return the asc
+     */
+    public boolean isAsc() {
+        return asc;
+    }
+
+    /**
+     * @param asc the asc to set
+     * @return
+     */
+    public XY setAsc(boolean asc) {
+        this.asc = asc;
+        return this;
     }
 
 }
