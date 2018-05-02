@@ -6,7 +6,6 @@
 package com.zada.data.type;
 
 import com.bake.time.TimeUtils;
-//import com.vng.monitor.utils.TimeUtils;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -32,42 +31,6 @@ public class TimeSeries extends XY {
         super(data);
     }
 
-    /**
-     * @return the data
-     */
-//    public Map<Long, Number> getData() {
-//        return data;
-//    }
-    /**
-     * @param data the data to set
-     */
-//    private TimeSeries setData(Map<? extends Object, ? extends Number> data) {
-//        this.data = new TreeMap<>();
-//        data.forEach((Object key, Number val) -> {
-//            this.set(key, val);
-//        });
-//        return this;
-//    }
-//    public TimeSeries set(Object key, Number val) {
-//        isTime(key);
-//        this.getData().put(Long.parseLong(key.toString()), val);
-//        return this;
-//    }
-//    public <T extends Number> T get(Object time) {
-//        isTime(time);
-//        return (T) this.getData().get(Long.parseLong(time.toString()));
-//    }
-//    private void isTime(Object key) {
-//        boolean is = false;
-//        try {
-//            Long.parseLong(key.toString());
-//            is = true;
-//        } catch (NumberFormatException ignore) {
-//        }
-//        if (!is) {
-//            throw new UnSupportTimeException("TimeSeries can not support Key without parsing to Long");
-//        }
-//    }
     /**
      * @return the type
      */
