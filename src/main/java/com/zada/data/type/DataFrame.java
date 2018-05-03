@@ -175,6 +175,26 @@ public class DataFrame {
         }
     }
 
+    public String toString(int from, int to) {
+        String headerInfo = String.format("index\t%s", String.join("\t", this.getHeader()));
+        StringBuilder sb = new StringBuilder();
+        sb.append(headerInfo).append("\n");
+        for (int i = 0; i < this.getRowSize(); i++) {
+            if (i >= from) {
+                StringBuilder cabin = new StringBuilder();
+                List<Object> row = this.getRow(i);
+                row.forEach((obj) -> {
+                    cabin.append(obj.toString()).append("\t");
+                });
+                sb.append(i).append("\t").append(cabin.toString()).append("\n");
+            }
+            if (i == to) {
+                break;
+            }
+        }
+        return sb.toString();
+    }
+
     public String toString(int limitIndex) {
         String headerInfo = String.format("index\t%s", String.join("\t", this.getHeader()));
         StringBuilder sb = new StringBuilder();

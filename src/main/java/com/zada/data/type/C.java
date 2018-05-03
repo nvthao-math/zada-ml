@@ -5,8 +5,6 @@
  */
 package com.zada.data.type;
 
-import com.bake.time.EUtils;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -105,35 +103,44 @@ public class C<D> {
         return this.getData().get(index);
     }
 
-    public static void main(String[] args) throws NoSuchFieldException {
-//        List<Integer> list = new ArrayList<>();
-//        list.add(0);
-//        Integer[] itn = {1, 2, 3, 4, 6, 8};
-//        C c = new C(list);
-//        c.addData(1000);
-        List<String> list = new ArrayList<>();
-        list.add("seas");
-        list.add("fft1");
-        C vec = new C(list);
-//        vec.clone();
-        System.out.println(EUtils.toJson(vec));
-        //
-//        Object foo = new Object();
-// There's no support for this
-//        String name = foo.getName(); // expecting to get "foo"
-        System.out.println(vec);
-        String name = vec.getClass().getCanonicalName();
-        System.out.println(name);
-        Field[] fields = vec.getClass().getDeclaredFields();
-        for (Field f : fields) {
+    public boolean isEmpty() {
+        return this.getData().isEmpty();
+    }
 
-            System.out.println(f.getName());
+    public <T extends Number> T min() {
+        T min = null;
+        Object sample = this.getData().get(0);
+        if (sample instanceof Number) {
+            min = (T) sample;
+            for (D ob : this.getData()) {
+                T obt = (T) ob;
+                if (obt.doubleValue() < min.doubleValue()) {
+                    min = obt;
+                }
+            }
         }
-        //
-        for (Field f : vec.getClass().getFields()) {
-            System.out.println(f.getName());
+        return min;
+    }
+
+    public <T extends Number> T max() {
+        T max = null;
+        Object sample = this.getData().get(0);
+        if (sample instanceof Number) {
+            max = (T) sample;
+            for (D ob : this.getData()) {
+                T obt = (T) ob;
+                if (obt.doubleValue() > max.doubleValue()) {
+                    max = obt;
+                }
+            }
         }
-        vec.getClass().getFields();
+        return max;
+    }
+
+    @Override
+    public String toString() {
+        String info = String.format("%s: %s", this.getName(), this.getData());
+        return info;
     }
 
 }
